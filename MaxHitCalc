@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max Hit Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .calculator {
+            border: 2px solid #ccc;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .calculator label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .calculator input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .calculator button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .calculator button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Max Hit Calculator</h1>
+<div class="calculator">
+    <label for="stat">Melee Strength (stat):</label>
+    <input type="number" id="stat" placeholder="Enter melee strength">
+
+    <label for="level">Strength Level:</label>
+    <input type="number" id="level" placeholder="Enter strength level">
+
+    <button onclick="calculateMaxHit()">Calculate</button>
+
+    <div class="result" id="result">Your max hit will be displayed here.</div>
+</div>
+
+<script>
+function calculateMaxHit() {
+    const stat = parseFloat(document.getElementById('stat').value);
+    const level = parseFloat(document.getElementById('level').value);
+
+    if (isNaN(stat) || isNaN(level)) {
+        document.getElementById('result').innerText = "Please enter valid numbers for both fields.";
+        return;
+    }
+
+    const maxHit = (stat / 8 + level + 13 + (stat * level / 64)) / 10;
+    document.getElementById('result').innerText = `Your max hit is ${maxHit.toFixed(2)}.`;
+}
+</script>
+
+</body>
+</html>
